@@ -30,7 +30,7 @@ body {
     justify-content: center;
 }
 
-.button {
+button {
     height: 80px;
     width: 80px;
     background-color: #F2FCFC;
