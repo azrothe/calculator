@@ -7,21 +7,22 @@ body {
     background-color: #DFF0F0;
     display: flex;
     flex-direction: column;
-    width: 348px;
+    width: 388px;
     align-items: center;
     padding-bottom: 5px;
 }
 
 .display {
-    width: 325px;
-    height: 40px;
+    width: 363px;
+    height: 42px;
     text-align: right;
     border: solid 2px black;
     margin-top: 5px;
     margin-bottom: 5px;
-    padding-right: 3px;
+    padding-right: 5px;
+    padding-top: 3px;
     font-size: 24pt;  
-    background-color: #F2FCFC;;
+    background-color: #F2FCFC;
 }
 
 .input-panel {
@@ -31,9 +32,9 @@ body {
 }
 
 button {
-    height: 80px;
-    width: 80px;
+    height: 90px;
+    width: 90px;
     background-color: #F2FCFC;
     margin: 2px;
-    font-size: 16pt;
+    font-size: 18pt;
 }
