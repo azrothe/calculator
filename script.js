@@ -189,5 +189,12 @@ for (button of buttons) {
         else if(classid === "utility") {
             utility(id);
         }
+        let displayPanel = document.querySelector(".display");
+        if (display !== "") {
+            displayPanel.textContent = display;
+        }
+        else {
+            displayPanel.textContent = 0;
+        }
     });
 }
