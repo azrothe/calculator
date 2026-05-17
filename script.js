@@ -177,12 +177,7 @@ function operatorFunc(id) {
         operator = idChar;
         resultDisplayed = false;
         operatorPressed = true;
-        // if (first === 0) {
-        //     display = "";
-        // }
-        // else {
         display = parseFloat(first.toFixed(9)) + " " + idChar + " ";
-        // }
     }
 }
 
