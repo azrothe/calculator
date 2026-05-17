@@ -1,10 +1,8 @@
 let first = null;
 let second = null;
 let operator = null;
-let display = "";
 let validDisplay = true;
 let resultDisplayed = false;
-let operatorPressed = false;
 
 function add(first, second) {
     return first + second;
@@ -99,7 +97,6 @@ function idToChar(id) {
 }
 
 function numeral(id) {
-    operatorPressed = false;
     if (!validDisplay) {
         return;
     }
@@ -107,17 +104,11 @@ function numeral(id) {
         first = null;
         second = null;
         operator = null;
-        display = "";
         validDisplay = true;
         resultDisplayed = false;
-        operatorPressed = false;
     }
     let idChar = idToChar(id);
-    if ((operator === null && first === 0) || (operator !== null && second === 0)) {
-        display = display.slice(0, -1);
-    }
     if (((operator === null && first !== null) || (operator !== null && second !== null)) || idChar !== "0") {
-        display += idChar;
         if (operator === null) {
             if (first === null) {
                 first = Number(idChar);
@@ -136,11 +127,9 @@ function numeral(id) {
         }
     }
     else if (operator === null && first === null) {
-        display += 0;
         first = 0;
     }
     else if (operator !== null && second === null) {
-        display += 0;
         second = 0;
     }
 }
@@ -149,64 +138,64 @@ function operatorFunc(id) {
     if (!validDisplay) {
         return;
     }
-    if (operatorPressed) {
-        display = display.slice(0, -3);
-        operatorPressed = false;
-    }
-    if (display === "") {
-        display += 0;
-        first = 0;
-    }
-    console.log(first);
-    console.log(second);
-    console.log(operator);
+    // if (display === "") {
+    //     display += 0; ////////////////////////////////////////////////
+    //     first = 0;
+    // }
     let idChar = idToChar(id);
     if (first !== null && second === null) {
-        display += " " + idChar + " ";
         operator = idChar;
         resultDisplayed = false;
-        operatorPressed = true;
     }
     else if (first !== null && second !== null) {
         first = operate(operator, first, second);
         if (!validDisplay) {
-            display = first;
             return;
         }
         second = null;
         operator = idChar;
         resultDisplayed = false;
-        operatorPressed = true;
-        display = parseFloat(first.toFixed(9)) + " " + idChar + " ";
     }
 }
 
 function utility(id) {
-    operatorPressed = false;
     if (id === "clear") {
         first = null;
         second = null;
         operator = null;
-        display = "";
         validDisplay = true;
     }
     else if (id === "equals" && first !== null && operator !== null && second !== null && validDisplay) {
         first = operate(operator, first, second);
         if (!validDisplay) {
-            display = first;
             return;
         }
+        operator = null;
         second = null;
         resultDisplayed = true;
-        if (first === 0) {
-            display = "";
-        }
-        else {
-            display = parseFloat(first.toFixed(9));
-        }
     }
 }
 
+function printDisplay() {
+    let display = "";
+    if (!validDisplay) {
+        display += "Divide by Zero";
+        return display;
+    }
+    if (first === null) {
+        display += 0;
+    }
+    else {
+        display += parseFloat(first.toFixed(9));
+    }
+    if (operator !== null) {
+        display += " " + operator + " ";
+    }
+    if (second !== null) {
+        display += parseFloat(second.toFixed(9));
+    }
+    return display;
+}
 
 
 let buttons = document.querySelectorAll("button");
@@ -224,11 +213,6 @@ for (button of buttons) {
             utility(id);
         }
         let displayPanel = document.querySelector(".display");
-        if (display !== "") {
-            displayPanel.textContent = display;
-        }
-        else {
-            displayPanel.textContent = 0;
-        }
+        displayPanel.textContent = printDisplay();
     });
 }
