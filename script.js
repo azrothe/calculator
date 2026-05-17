@@ -138,10 +138,6 @@ function operatorFunc(id) {
     if (!validDisplay) {
         return;
     }
-    // if (display === "") {
-    //     display += 0; ////////////////////////////////////////////////
-    //     first = 0;
-    // }
     let idChar = idToChar(id);
     if (first !== null && second === null) {
         operator = idChar;
