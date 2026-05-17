@@ -3,6 +3,7 @@ let second = null;
 let operator = null;
 let display = "";
 let validDisplay = true;
+let resultDisplayed = false;
 
 function add(first, second) {
     return first + second;
@@ -100,6 +101,14 @@ function numeral(id) {
     if (!validDisplay) {
         return;
     }
+    if (resultDisplayed) {
+        first = null;
+        second = null;
+        operator = null;
+        display = "";
+        validDisplay = true;
+        resultDisplayed = false;
+    }
     let idChar = idToChar(id);
     if ((operator === null && first === 0) || (operator !== null && second === 0)) {
         display = display.slice(0, -1);
@@ -150,7 +159,13 @@ function operatorFunc(id) {
         }
         second = null;
         operator = idChar;
-        display = parseFloat(first.toFixed(9)) + " " + idChar + " ";
+        if (first === 0) {
+            display = "";
+        }
+        else {
+            display = parseFloat(first.toFixed(9)) + " " + idChar + " ";
+        }
+        
     }
 }
 
@@ -169,7 +184,14 @@ function utility(id) {
             return;
         }
         second = null;
-        display = parseFloat(first.toFixed(9));
+        resultDisplayed = true;
+        if (first === 0) {
+            display = "";
+        }
+        else {
+            display = parseFloat(first.toFixed(9));
+        }
+        
     }
 }
 
