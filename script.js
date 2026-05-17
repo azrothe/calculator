@@ -4,6 +4,7 @@ let operator = null;
 let display = "";
 let validDisplay = true;
 let resultDisplayed = false;
+let operatorPressed = false;
 
 function add(first, second) {
     return first + second;
@@ -98,6 +99,7 @@ function idToChar(id) {
 }
 
 function numeral(id) {
+    operatorPressed = false;
     if (!validDisplay) {
         return;
     }
@@ -108,6 +110,7 @@ function numeral(id) {
         display = "";
         validDisplay = true;
         resultDisplayed = false;
+        operatorPressed = false;
     }
     let idChar = idToChar(id);
     if ((operator === null && first === 0) || (operator !== null && second === 0)) {
@@ -146,10 +149,23 @@ function operatorFunc(id) {
     if (!validDisplay) {
         return;
     }
+    if (operatorPressed) {
+        display = display.slice(0, -3);
+        operatorPressed = false;
+    }
+    if (display === "") {
+        display += 0;
+        first = 0;
+    }
+    console.log(first);
+    console.log(second);
+    console.log(operator);
     let idChar = idToChar(id);
     if (first !== null && second === null) {
         display += " " + idChar + " ";
         operator = idChar;
+        resultDisplayed = false;
+        operatorPressed = true;
     }
     else if (first !== null && second !== null) {
         first = operate(operator, first, second);
@@ -159,17 +175,19 @@ function operatorFunc(id) {
         }
         second = null;
         operator = idChar;
-        if (first === 0) {
-            display = "";
-        }
-        else {
-            display = parseFloat(first.toFixed(9)) + " " + idChar + " ";
-        }
-        
+        resultDisplayed = false;
+        operatorPressed = true;
+        // if (first === 0) {
+        //     display = "";
+        // }
+        // else {
+        display = parseFloat(first.toFixed(9)) + " " + idChar + " ";
+        // }
     }
 }
 
 function utility(id) {
+    operatorPressed = false;
     if (id === "clear") {
         first = null;
         second = null;
@@ -191,7 +209,6 @@ function utility(id) {
         else {
             display = parseFloat(first.toFixed(9));
         }
-        
     }
 }
 
